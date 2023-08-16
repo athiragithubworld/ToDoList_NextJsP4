@@ -1,0 +1,32 @@
+.control {
+  margin: 1rem;
+  /* margin-bottom: 0.5rem; */
+}
+
+.table {
+  /* display: block; */
+  /* font-weight: bold; */
+  border-collapse: collapse;
+  margin: 1rem;
+  width: 90%;
+  overflow: auto;
+  /* margin-bottom: 0.5rem; */
+}
+
+.td {
+  border-bottom: 1px solid black;
+}
+.tr {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid black; /* Add a bottom border to all rows */
+}
+/* .tr:hover {
+  background-color: rgb(176, 174, 173);
+} */
+
+.td {
+  padding: 12px;
+  text-align: left;
+  /* border-bottom: 1px solid #151414; */
+}
