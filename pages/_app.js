@@ -1,5 +1,15 @@
-import '@/styles/globals.css'
+import ToDoProvider from "@/components/store/ToDoProvider";
+import "../styles/globals.css";
+import Layout from "@/components/Layout/Layout";
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function MyApp({ Component, pageProps }) {
+  return (
+    <Layout>
+      <ToDoProvider>
+        <Component {...pageProps} />
+      </ToDoProvider>
+    </Layout>
+  );
 }
+
+export default MyApp;
