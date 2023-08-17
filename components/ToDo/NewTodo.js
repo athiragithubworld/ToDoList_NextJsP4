@@ -18,7 +18,7 @@ const NewTodo = (props) => {
       todoContent: enteredTodo,
       date: new Date(),
       doneTask: false,
-      status: "incomplete",
+      // status: "incomplete",
     };
 
     props.onTodoList(todoData);
