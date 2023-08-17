@@ -13,6 +13,10 @@ const TodoList = (props) => {
 
   useEffect(() => {
     setTodoList(props.todoList);
+    // show not completed task
+    setTodoList((prevData) =>
+      prevData.filter((item) => item.doneTask === false)
+    );
   }, [props.todoList]);
 
   const onDeleteHandler = (item) => {
@@ -21,13 +25,40 @@ const TodoList = (props) => {
     todocntx.removetoDoList(item);
   };
 
-  const handleCheckboxChange = (id) => {
+  const handleCheckboxChange = async (item) => {
     setTodoList((prevData) =>
       prevData.map((row) =>
-        row.id === id ? { ...row, doneTask: !row.doneTask } : row
+        row.id === item.id ? { ...row, doneTask: !row.doneTask } : row
       )
     );
-    todocntx.todoTaskDone(id);
+    todocntx.todoTaskDone(item.id);
+
+    // Update todo in backend
+    try {
+      const response = await fetch("/api/update-todo", {
+        method: "PUT",
+        body: JSON.stringify({
+          id: item.id,
+          todoContent: item.todoContent,
+          date: item.date,
+          doneTask: !item.doneTask,
+          key: item.key,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      // show not completed task
+      setTodoList((prevData) =>
+        prevData.filter((item) => item.doneTask === false)
+      );
+    } catch (error) {
+      console.log("error in update todo ", error);
+    }
   };
 
   return (
@@ -48,7 +79,7 @@ const TodoList = (props) => {
                         checked={item.doneTask}
                         onChange={(e) => {
                           e.stopPropagation();
-                          handleCheckboxChange(item.id);
+                          handleCheckboxChange(item);
                         }}
                       ></input>
                     </td>
