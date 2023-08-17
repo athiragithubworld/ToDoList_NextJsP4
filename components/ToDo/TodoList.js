@@ -7,13 +7,13 @@ import ToDoContext from "../store/ToDoContext";
 const TodoList = (props) => {
   const todocntx = useContext(ToDoContext);
 
-  console.log("todo", props.todoList);
+  console.log("propstodo", props.todoList);
 
-  const [todoList, setTodoList] = useState(todocntx.toDoList);
+  const [todoList, setTodoList] = useState(props.todoList);
 
   useEffect(() => {
-    setTodoList(todocntx.toDoList);
-  }, [todocntx.toDoList]);
+    setTodoList(props.todoList);
+  }, [props.todoList]);
 
   const onDeleteHandler = (item) => {
     const delTodo = todoList.filter((todoItem) => todoItem.id !== item.id);
@@ -41,7 +41,7 @@ const TodoList = (props) => {
             {todoList &&
               todoList.map((item) => {
                 return (
-                  <tr className={classes.tr} key={item.key}>
+                  <tr className={classes.tr} key={item.id}>
                     <td>
                       <input
                         type="checkbox"
