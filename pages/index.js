@@ -55,6 +55,7 @@ export async function getStaticProps() {
         date: item.date,
         doneTask: item.doneTask,
         key: item._id.toString(),
+        status: item.status,
       })),
     },
     revalidate: 1,
