@@ -20,7 +20,7 @@ const NewTodo = (props) => {
       doneTask: false,
     };
 
-    // props.onTodoList(todoData);
+    props.onTodoList(todoData);
     todocxt.todoAddHandler(todoData);
   };
 
