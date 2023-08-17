@@ -1,4 +1,4 @@
-//  /api/new-todo
+//  /api/update-todo
 
 import { MongoClient, ObjectId } from "mongodb";
 
