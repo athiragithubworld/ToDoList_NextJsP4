@@ -1,28 +1,37 @@
 import React, { Fragment, useRef, useContext } from "react";
 import Card from "../UI/Card";
 import classes from "./NewTodo.module.css";
-import ToDoContext from "../store/ToDoContext";
+import { useRouter } from "next/router";
+// import ToDoContext from "../store/ToDoContext";
 // import TodoList from "./TodoList";
 
 const NewTodo = (props) => {
-  const todocxt = useContext(ToDoContext);
+  // const todocxt = useContext(ToDoContext);
   const todoInputRef = useRef();
+  const router = useRouter();
 
   const submitHandler = (event) => {
     event.preventDefault();
 
     const enteredTodo = todoInputRef.current.value;
 
-    const todoData = {
-      id: Math.random().toString(),
-      todoContent: enteredTodo,
-      date: new Date(),
-      doneTask: false,
-      // status: "incomplete",
-    };
+    if (enteredTodo) {
+      const todoData = {
+        id: Math.random().toString(),
+        todoContent: enteredTodo,
+        date: new Date(),
+        doneTask: false,
+        // status: "incomplete",
+      };
 
-    props.onTodoList(todoData);
-    todocxt.todoAddHandler(todoData);
+      props.onTodoList(todoData);
+    } else {
+      return alert("Please enter the todo ");
+    }
+
+    router.push("/");
+    // todocxt.todoAddHandler(todoData);
+    todoInputRef.current.value = "";
   };
 
   return (

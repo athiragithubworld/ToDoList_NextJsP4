@@ -81,7 +81,7 @@ const TodoList = (props) => {
   return (
     <Card>
       <div className={classes.control}>
-        <h1>Today's Todo List</h1>
+        <h1> Todo List</h1>
       </div>
       <div>
         <table className={classes.table}>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import ToDoContext from "../store/ToDoContext";
+// import ToDoContext from "../store/ToDoContext";
 import Card from "../UI/Card";
 import classes from "./CompletedToDoTask.module.css";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -7,7 +7,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 const CompletedToDoTask = (props) => {
   // const todocntx = useContext(ToDoContext);
   const [todoList, settodoListDone] = useState(props.todoList);
-  console.log("done todo", props.todoList);
+  // console.log("done todo", props.todoList);
 
   useEffect(() => {
     if (props.todoList) {
