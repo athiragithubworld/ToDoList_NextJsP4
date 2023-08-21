@@ -29,7 +29,7 @@ const NewTodo = (props) => {
       return alert("Please enter the todo ");
     }
 
-    router.push("/");
+    router.replace("/");
     // todocxt.todoAddHandler(todoData);
     todoInputRef.current.value = "";
   };
