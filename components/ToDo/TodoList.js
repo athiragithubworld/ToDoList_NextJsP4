@@ -7,7 +7,7 @@ import ToDoContext from "../store/ToDoContext";
 const TodoList = (props) => {
   const todocntx = useContext(ToDoContext);
 
-  console.log("propstodo", props.todoList);
+  // console.log("propstodo", props.todoList);
 
   const [todoList, setTodoList] = useState(props.todoList);
 
