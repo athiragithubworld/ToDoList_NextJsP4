@@ -7,26 +7,27 @@ import { MongoClient } from "mongodb";
 const index = (props) => {
   // const [todoList, setTodoList] = useState([]);
 
-  const addTodoListHandler = async (addedTodoList) => {
-    console.log("todolist", addedTodoList);
+  // const addTodoListHandler = async (addedTodoList) => {
+  //   console.log("todolist", addedTodoList);
 
-    const response = await fetch("/api/new-todo", {
-      method: "POST",
-      body: JSON.stringify(addedTodoList),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  //   const response = await fetch("/api/new-todo", {
+  //     method: "POST",
+  //     body: JSON.stringify(addedTodoList),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
 
-    const data = await response.json();
-    console.log(data);
-  };
+  //   const data = await response.json();
+  //   console.log(data);
+  // };
 
   return (
     <Fragment>
       <div>
         <h1>Add New Todo </h1>
-        <NewTodo onTodoList={addTodoListHandler} />
+        {/* <NewTodo onTodoList={addTodoListHandler} /> */}
+        <NewTodo />
       </div>
       <div>
         <TodoList todoList={props.todoList} />
@@ -35,9 +36,36 @@ const index = (props) => {
   );
 };
 
-export async function getStaticProps() {
-  // fetch data from api
+// export async function getStaticProps() {
+//   // fetch data from api
 
+//   const client = await MongoClient.connect(
+//     "mongodb+srv://Athipython:twmE5fn6eWqn6gYx@cluster0.jnw4ana.mongodb.net/todoLists?retryWrites=true&w=majority"
+//   );
+
+//   const db = client.db();
+
+//   const todoCollections = db.collection("todoLists");
+//   const todoLists = await todoCollections.find().toArray();
+
+//   return {
+//     props: {
+//       todoList: todoLists.map((item) => ({
+//         id: item.id,
+//         todoContent: item.todoContent,
+//         date: item.date,
+//         doneTask: item.doneTask,
+//         key: item._id.toString(),
+//         // status: item.status,
+//       })),
+//     },
+//     revalidate: 1,
+//   };
+// }
+
+export async function getServerSideProps() {
+  // fetch data from api
+  console.log(`get request, getStaticPropsCalled`);
   const client = await MongoClient.connect(
     "mongodb+srv://Athipython:twmE5fn6eWqn6gYx@cluster0.jnw4ana.mongodb.net/todoLists?retryWrites=true&w=majority"
   );
@@ -46,7 +74,7 @@ export async function getStaticProps() {
 
   const todoCollections = db.collection("todoLists");
   const todoLists = await todoCollections.find().toArray();
-
+  console.log(todoLists);
   return {
     props: {
       todoList: todoLists.map((item) => ({
@@ -58,7 +86,7 @@ export async function getStaticProps() {
         // status: item.status,
       })),
     },
-    revalidate: 1,
+    // revalidate: 1,
   };
 }
 
