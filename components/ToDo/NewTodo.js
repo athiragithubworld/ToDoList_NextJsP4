@@ -10,6 +10,22 @@ const NewTodo = (props) => {
   const todoInputRef = useRef();
   const router = useRouter();
 
+  const addTodoListHandler = async (addedTodoList) => {
+    console.log("todolist", addedTodoList);
+
+    const response = await fetch("/api/new-todo", {
+      method: "POST",
+      body: JSON.stringify(addedTodoList),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    console.log(data);
+    router.replace("/");
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -23,13 +39,13 @@ const NewTodo = (props) => {
         doneTask: false,
         // status: "incomplete",
       };
-
-      props.onTodoList(todoData);
+      addTodoListHandler(todoData);
+      // props.onTodoList(todoData);
     } else {
       return alert("Please enter the todo ");
     }
 
-    router.replace("/");
+    // router.replace("/");
     // todocxt.todoAddHandler(todoData);
     todoInputRef.current.value = "";
   };
